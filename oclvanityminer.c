@@ -1,6 +1,6 @@
 /*
  * FAKu, vanity FakeCoin address generator
- * Copyright (C) 2011 <samr7@cs.washington.edu>
+ * Copyright (C) 2011 samr7
  * Copyright (C) 2018 Scyne
  *
  * FAKu is free software: you can redistribute it and/or modify
