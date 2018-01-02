@@ -1,19 +1,20 @@
 /*
- * Vanitygen, vanity bitcoin address generator
+ * FAKu, vanity FakeCoin address generator
  * Copyright (C) 2011 <samr7@cs.washington.edu>
+ * Copyright (C) 2018 Scyne
  *
- * Vanitygen is free software: you can redistribute it and/or modify
+ * FAKu is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * any later version. 
+ * any later version.
  *
- * Vanitygen is distributed in the hope that it will be useful,
+ * FAKu is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with Vanitygen.  If not, see <http://www.gnu.org/licenses/>.
+ * along with FAKu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <stdio.h>
@@ -30,7 +31,7 @@
 #include "util.h"
 
 
-const char *version = VANITYGEN_VERSION;
+const char *version = FAKu_VERSION;
 const int debug = 0;
 
 
@@ -38,11 +39,11 @@ void
 usage(const char *name)
 {
 	fprintf(stderr,
-"oclVanitygen %s (" OPENSSL_VERSION_TEXT ")\n"
+"oclFAKu %s (" OPENSSL_VERSION_TEXT ")\n"
 "Usage: %s [-vqrik1NTS] [-d <device>] [-f <filename>|-] [<pattern>...]\n"
-"Generates a bitcoin receiving address matching <pattern>, and outputs the\n"
+"Generates a FakeCoin receiving address matching <pattern>, and outputs the\n"
 "address and associated private key.  The private key may be stored in a safe\n"
-"location or imported into a bitcoin client to spend any balance received on\n"
+"location or imported into a FakeCoin client to spend any balance received on\n"
 "the address.\n"
 "By default, <pattern> is interpreted as an exact prefix.\n"
 "By default, if no device is specified, and the system has exactly one OpenCL\n"
@@ -57,8 +58,6 @@ usage(const char *name)
 "-i            Case-insensitive prefix search\n"
 "-k            Keep pattern and continue search after finding a match\n"
 "-1            Stop after first match\n"
-"-N            Generate namecoin address\n"
-"-T            Generate bitcoin testnet address\n"
 "-X <version>  Generate address with the given version\n"
 "-e            Encrypt private keys, prompt for password\n"
 "-E <password> Encrypt private keys with <password> (UNSAFE)\n"
@@ -86,7 +85,7 @@ version, name);
 int
 main(int argc, char **argv)
 {
-	int addrtype = 0;
+	int addrtype = 127;
 	int privtype = 128;
 	int regex = 0;
 	int caseinsensitive = 0;

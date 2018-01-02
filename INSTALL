@@ -30,4 +30,4 @@ and remove "/MD" from the CFLAGS.  Then, build with: "nmake VC-static"
 After dependencies have been prepared, open a Visual Studio command
 prompt window, and run:
 
-nmake /fMakefile.Win32 vanitygen.exe oclvanitygen.exe
+nmake /fMakefile.Win32 FAKu.exe oclFAKu.exe

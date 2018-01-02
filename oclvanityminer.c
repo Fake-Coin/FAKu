@@ -1,19 +1,20 @@
 /*
- * Vanitygen, vanity bitcoin address generator
+ * FAKu, vanity FakeCoin address generator
  * Copyright (C) 2011 <samr7@cs.washington.edu>
+ * Copyright (C) 2018 Scyne
  *
- * Vanitygen is free software: you can redistribute it and/or modify
+ * FAKu is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * any later version. 
+ * any later version.
  *
- * Vanitygen is distributed in the hope that it will be useful,
+ * FAKu is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with Vanitygen.  If not, see <http://www.gnu.org/licenses/>.
+ * along with FAKu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <stdio.h>
@@ -35,7 +36,7 @@
 #include "avl.h"
 
 
-const char *version = VANITYGEN_VERSION;
+const char *version = FAKu_VERSION;
 const int debug = 0;
 
 
@@ -423,9 +424,9 @@ server_workitem_add(server_request_t *reqp, workitem_t *wip)
 		avl_root_init(&pbatch->items);
 		pbatch->total_value = 0;
 		pbatch->pubkey = wip->pubkey;
-		pbatch->pubkey_hex = EC_POINT_point2hex(reqp->group, 
-					wip->pubkey, 
-					POINT_CONVERSION_UNCOMPRESSED, 
+		pbatch->pubkey_hex = EC_POINT_point2hex(reqp->group,
+					wip->pubkey,
+					POINT_CONVERSION_UNCOMPRESSED,
 					NULL);
 		pubkeybatch_avl_insert(&reqp->items, pbatch);
 		reqp->nitems++;
@@ -439,7 +440,7 @@ server_workitem_add(server_request_t *reqp, workitem_t *wip)
 	if (wip->pubkey && wip->pubkey != pbatch->pubkey)
 		EC_POINT_free(wip->pubkey);
 	wip->pubkey = pbatch->pubkey;
-	
+
 	pbatch->nitems++;
 	pbatch->total_value += wip->value;
 	return 0;
@@ -639,7 +640,7 @@ server_context_submit_solution(server_context_t *ctxp,
 				    POINT_CONVERSION_UNCOMPRESSED,
 				    NULL);
 	snprintf(urlbuf, sizeof(urlbuf),
-		 "%s?key=%s%%3A%s&privateKey=%s&bitcoinAddress=%s",
+		 "%s?key=%s%%3A%s&privateKey=%s&FakeCoinAddress=%s",
 		 ctxp->submit,
 		 work->pattern,
 		 pubhex,
@@ -1038,12 +1039,12 @@ main(int argc, char **argv)
 				else {
 					active_pkb_value += wip->value;
 				}
-				
+
 				assert(vcp->vc_npatterns);
 			}
 
-			fprintf(stderr, 
-				"\nTotal value for current work: %f BTC/Gkey\n", 
+			fprintf(stderr,
+				"\nTotal value for current work: %f BTC/Gkey\n",
 				active_pkb_value);
 			res = vg_context_start_threads(vcp);
 			if (res)

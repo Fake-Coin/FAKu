@@ -1,19 +1,20 @@
 /*
- * Vanitygen, vanity bitcoin address generator
+ * FAKu, vanity FakeCoin address generator
  * Copyright (C) 2011 <samr7@cs.washington.edu>
+ * Copyright (C) 2018 Scyne
  *
- * Vanitygen is free software: you can redistribute it and/or modify
+ * FAKu is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * any later version. 
+ * any later version.
  *
- * Vanitygen is distributed in the hope that it will be useful,
+ * FAKu is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with Vanitygen.  If not, see <http://www.gnu.org/licenses/>.
+ * along with FAKu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <stdio.h>
@@ -825,7 +826,7 @@ get_prefix_ranges(int addrtype, const char *pfx, BIGNUM **result,
 				BN_free(bnlow);
 				bnlow = bnlow2;
 				bnlow2 = NULL;
-			}			
+			}
 			else if (BN_cmp(&bnfloor, bnlow) > 0) {
 				/* Low prefix is partly below the floor */
 				BN_copy(bnlow, &bnfloor);
@@ -1105,12 +1106,12 @@ vg_prefix_add_ranges(avl_root_t *rootp, const char *pattern, BIGNUM **ranges,
 			vp2->vp_sibling = vp;
 	} else if (vp2) {
 		vp->vp_sibling = vp2;
-		vp2->vp_sibling = (master->vp_sibling ? 
+		vp2->vp_sibling = (master->vp_sibling ?
 				   master->vp_sibling :
 				   master);
 		master->vp_sibling = vp;
 	} else {
-		vp->vp_sibling = (master->vp_sibling ? 
+		vp->vp_sibling = (master->vp_sibling ?
 				  master->vp_sibling :
 				  master);
 		master->vp_sibling = vp;
@@ -1387,10 +1388,10 @@ vg_prefix_context_add_patterns(vg_context_t *vcp,
 	vcpp->base.vc_npatterns_start += npfx;
 
 	if (!npfx && impossible) {
-		const char *ats = "bitcoin", *bw = "\"1\"";
+		const char *ats = "FakeCoin", *bw = "\"1\"";
 		switch (vcpp->base.vc_addrtype) {
 		case 5:
-			ats = "bitcoin script";
+			ats = "FakeCoin script";
 			bw = "\"3\"";
 			break;
 		case 111:

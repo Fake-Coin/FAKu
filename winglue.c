@@ -1,24 +1,25 @@
 /*
- * Vanitygen, vanity bitcoin address generator
+ * FAKu, vanity FakeCoin address generator
  * Copyright (C) 2011 <samr7@cs.washington.edu>
+ * Copyright (C) 2018 Scyne
  *
- * Vanitygen is free software: you can redistribute it and/or modify
+ * FAKu is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * any later version. 
+ * any later version.
  *
- * Vanitygen is distributed in the hope that it will be useful,
+ * FAKu is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with Vanitygen.  If not, see <http://www.gnu.org/licenses/>.
+ * along with FAKu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <windows.h>
 #include <stdio.h>
-#include <pthread.h> 
+#include <pthread.h>
 #include "winglue.h"
 
 int
@@ -89,7 +90,7 @@ gettimeofday(struct timeval *tv, struct timezone *tz)
 		tv->tv_sec = (int) ((*(unsigned __int64 *) &ft -
 				     TIMESPEC_TO_FILETIME_OFFSET) /
 				    10000000);
-		tv->tv_usec = (int) ((*(unsigned __int64 *) &ft - 
+		tv->tv_usec = (int) ((*(unsigned __int64 *) &ft -
 				      TIMESPEC_TO_FILETIME_OFFSET -
 				      ((unsigned __int64) tv->tv_sec *
 				       (unsigned __int64) 10000000)) / 10);

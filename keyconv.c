@@ -17,14 +17,14 @@
 #include "pattern.h"
 #include "util.h"
 
-const char *version = VANITYGEN_VERSION;
+const char *version = FAKu_VERSION;
 
 
 static void
 usage(const char *progname)
 {
 	fprintf(stderr,
-"Vanitygen keyconv %s\n"
+"FAKu keyconv %s\n"
 "Usage: %s [-8] [-e|-E <password>] [-c <key>] [<key>]\n"
 "-G            Generate a key pair and output the full public key\n"
 "-8            Output key in PKCS#8 form\n"
@@ -98,7 +98,7 @@ main(int argc, char **argv)
 
 	if (generate) {
 		unsigned char *pend = (unsigned char *) pbuf;
-		addrtype = 0;
+		addrtype = 127;
 		privtype = 128;
 		EC_KEY_generate_key(pkey);
 		res = i2o_ECPublicKey(pkey, &pend);
@@ -182,9 +182,9 @@ main(int argc, char **argv)
 	}
 
 	switch (privtype) {
-	case 128: addrtype = 0; break;
+	case 128: addrtype = 127; break;
 	case 239: addrtype = 111; break;
-	default:  addrtype = 0; break;
+	default:  addrtype = 127; break;
 	}
 
 	if (verbose) {
@@ -195,7 +195,7 @@ main(int argc, char **argv)
 		fprintf(stderr, "Privkey (hex): ");
 		dumpbn(EC_KEY_get0_private_key(pkey));
 	}
-			
+
 	if (pkcs8) {
 		res = vg_pkcs8_encode_privkey(pbuf, sizeof(pbuf),
 					      pkey, pass_in);

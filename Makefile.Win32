@@ -11,14 +11,14 @@ CURL_LIBS = $(CURL_DIR)\lib\libcurl_a.lib
 CFLAGS_BASE = /D_WIN32 /DPTW32_STATIC_LIB /DPCRE_STATIC /I$(OPENSSL_DIR)\inc32 /I$(PTHREADS_DIR) /I$(PCRE_DIR) /Ox /Zi
 CFLAGS = $(CFLAGS_BASE) /GL
 LIBS = $(OPENSSL_DIR)\out32\libeay32.lib $(PTHREADS_DIR)\pthreadVC2.lib $(PCRE_DIR)\pcre.lib ws2_32.lib user32.lib advapi32.lib gdi32.lib /LTCG /DEBUG
-OBJS = vanitygen.obj oclvanitygen.obj oclengine.obj oclvanityminer.obj keyconv.obj pattern.obj util.obj winglue.obj
+OBJS = FAKu.obj oclFAKu.obj oclengine.obj oclvanityminer.obj keyconv.obj pattern.obj util.obj winglue.obj
 
-all: vanitygen.exe keyconv.exe
+all: FAKu.exe keyconv.exe
 
-vanitygen.exe: vanitygen.obj pattern.obj util.obj winglue.obj
+FAKu.exe: FAKu.obj pattern.obj util.obj winglue.obj
 	link /nologo /out:$@ $** $(LIBS)
 
-oclvanitygen.exe: oclvanitygen.obj oclengine.obj pattern.obj util.obj winglue.obj
+oclFAKu.exe: oclFAKu.obj oclengine.obj pattern.obj util.obj winglue.obj
 	link /nologo /out:$@ $** $(LIBS) $(OPENCL_LIBS)
 
 oclvanityminer.exe: oclvanityminer.obj oclengine.obj pattern.obj util.obj winglue.obj
@@ -33,11 +33,11 @@ keyconv.exe: keyconv.obj util.obj winglue.obj
 oclengine.obj: oclengine.c
 	@$(CC) /nologo $(CFLAGS_BASE) $(OPENCL_INCLUDE) /c /Tpoclengine.c /Fo$@
 
-oclvanitygen.obj: oclvanitygen.c
-	@$(CC) /nologo $(CFLAGS_BASE) /c /Tpoclvanitygen.c /Fo$@
+oclFAKu.obj: oclFAKu.c
+	@$(CC) /nologo $(CFLAGS_BASE) /c /TpoclFAKu.c /Fo$@
 
 oclvanityminer.obj: oclvanityminer.c
 	@$(CC) /nologo $(CFLAGS_BASE) $(CURL_INCLUDE) /c /Tpoclvanityminer.c /Fo
 
 clean:
-	del vanitygen.exe oclvanitygen.exe oclvanityminer.exe keyconv.exe $(OBJS)
+	del FAKu.exe oclFAKu.exe oclvanityminer.exe keyconv.exe $(OBJS)

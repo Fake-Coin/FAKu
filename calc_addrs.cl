@@ -1,24 +1,25 @@
 /*
- * Vanitygen, vanity bitcoin address generator
+ * FAKu, vanity FakeCoin address generator
  * Copyright (C) 2011 <samr7@cs.washington.edu>
+ * Copyright (C) 2018 Scyne
  *
- * Vanitygen is free software: you can redistribute it and/or modify
+ * FAKu is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * any later version. 
+ * any later version.
  *
- * Vanitygen is distributed in the hope that it will be useful,
+ * FAKu is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with Vanitygen.  If not, see <http://www.gnu.org/licenses/>.
+ * along with FAKu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /*
  * This file contains an OpenCL kernel for performing certain parts of
- * the bitcoin address calculation process.
+ * the FakeCoin address calculation process.
  *
  * Kernel: ec_add_grid
  *
@@ -1017,7 +1018,7 @@ test_mod_inverse(__global bignum *inv_out, __global bignum *nums_in,
 #define ACCESS_STRIDE (ACCESS_BUNDLE/BN_NWORDS)
 
 __kernel void
-ec_add_grid(__global bn_word *points_out, __global bn_word *z_heap, 
+ec_add_grid(__global bn_word *points_out, __global bn_word *z_heap,
 	    __global bn_word *row_in, __global bignum *col_in)
 {
 	bignum rx, ry;

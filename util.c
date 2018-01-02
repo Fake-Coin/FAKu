@@ -1,19 +1,20 @@
 /*
- * Vanitygen, vanity bitcoin address generator
+ * FAKu, vanity FakeCoin address generator
  * Copyright (C) 2011 <samr7@cs.washington.edu>
+ * Copyright (C) 2018 Scyne
  *
- * Vanitygen is free software: you can redistribute it and/or modify
+ * FAKu is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * any later version. 
+ * any later version.
  *
- * Vanitygen is distributed in the hope that it will be useful,
+ * FAKu is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with Vanitygen.  If not, see <http://www.gnu.org/licenses/>.
+ * along with FAKu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #if defined(_WIN32)
@@ -360,7 +361,7 @@ vg_decode_privkey(const char *b58encoded, EC_KEY *pkey, int *addrtype)
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -497,7 +498,7 @@ vg_protect_crypt(int parameter_group,
 {
 	EVP_CIPHER_CTX *ctx = NULL;
 	unsigned char *salt;
-	unsigned char keymaterial[EVP_MAX_KEY_LENGTH + EVP_MAX_IV_LENGTH + 
+	unsigned char keymaterial[EVP_MAX_KEY_LENGTH + EVP_MAX_IV_LENGTH +
 				  EVP_MAX_MD_SIZE];
 	unsigned char hmac[EVP_MAX_MD_SIZE];
 	int hmac_len = 0, hmac_keylen = 0;
@@ -528,7 +529,7 @@ vg_protect_crypt(int parameter_group,
 			goto out;
 	}
 
-	if (parameter_group > (sizeof(protkey_parameters) / 
+	if (parameter_group > (sizeof(protkey_parameters) /
 			       sizeof(protkey_parameters[0])))
 		goto out;
 	params = &protkey_parameters[parameter_group];
@@ -734,7 +735,7 @@ vg_protect_decode_privkey(EC_KEY *pkey, int *keytype,
 }
 
 /*
- * Besides the bitcoin-adapted formats, we also support PKCS#8.
+ * Besides the FakeCoin-adapted formats, we also support PKCS#8.
  */
 int
 vg_pkcs8_encode_privkey(char *out, int outlen,
@@ -1079,7 +1080,7 @@ vg_read_file(FILE *fp, char ***result, int *rescount)
 		}
 
 		pos = pat ? (pat - buf) : count;
-	}			
+	}
 
 	*result = patterns;
 	*rescount = npatterns;

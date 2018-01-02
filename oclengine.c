@@ -1,19 +1,20 @@
 /*
- * Vanitygen, vanity bitcoin address generator
+ * FAKu, vanity FakeCoin address generator
  * Copyright (C) 2011 <samr7@cs.washington.edu>
+ * Copyright (C) 2018 Scyne
  *
- * Vanitygen is free software: you can redistribute it and/or modify
+ * FAKu is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * any later version. 
+ * any later version.
  *
- * Vanitygen is distributed in the hope that it will be useful,
+ * FAKu is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with Vanitygen.  If not, see <http://www.gnu.org/licenses/>.
+ * along with FAKu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <stdio.h>
@@ -1023,7 +1024,7 @@ vg_ocl_kernel_arg_alloc(vg_ocl_context_t *vocp, int slot,
 					     karg,
 					     sizeof(clbuf),
 					     &clbuf);
-			
+
 			if (ret) {
 				fprintf(stderr,
 					"clSetKernelArg(%d,%d): ", knum, karg);
@@ -1055,7 +1056,7 @@ vg_ocl_copyout_arg(vg_ocl_context_t *vocp, int wslot, int arg,
 				   buffer,
 				   0, NULL,
 				   NULL);
-			
+
 	if (ret) {
 		fprintf(stderr, "clEnqueueWriteBuffer(%d): ", arg);
 		vg_ocl_error(vocp, ret, NULL);
@@ -1936,7 +1937,7 @@ vg_opencl_loop(vg_exec_context_t *arg)
 		fprintf(stderr, "WARNING: low pattern difficulty\n");
 		fprintf(stderr,
 			"WARNING: better match throughput is possible "
-			"using vanitygen on the CPU\n");
+			"using FAKu on the CPU\n");
 	}
 
 	slot = 0;
@@ -2182,7 +2183,7 @@ l_rekey:
 			slot_busy = 1;
 			slot = (slot + 1) % nslots;
 
-		} else { 
+		} else {
 			if (slot_busy) {
 				pthread_mutex_lock(&vocp->voc_lock);
 				while (vocp->voc_ocl_slot != -1) {
@@ -2554,7 +2555,7 @@ vg_ocl_context_new(vg_context_t *vcp,
 	 * for free, and receive 10% incremental returns at 200.  The CPU
 	 * work size is therefore set to 256.
 	 *
-	 * The ratio on most GPUs with the oclvanitygen implementations
+	 * The ratio on most GPUs with the oclFAKu implementations
 	 * is closer to 500:1, and larger batches are required for
 	 * good performance.
 	 */
