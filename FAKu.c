@@ -330,9 +330,12 @@ version, name);
 int
 main(int argc, char **argv)
 {
-	int addrtype = 127;
-	int scriptaddrtype = 5;
-	int privtype = 128;
+	// https://github.com/Scyne/FakeCoin/blob/master/src/base58.h#L275
+	int addrtype = 0x7F;
+	int scriptaddrtype = 0x7D;
+	// https://github.com/Scyne/FakeCoin/blob/master/src/base58.h#L403
+	int privtype = 0xFF;
+
 	int pubkeytype;
 	enum vg_format format = VCF_PUBKEY;
 	int regex = 0;
